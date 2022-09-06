@@ -7,16 +7,20 @@ TODO coverage status
 
 Udemy ["Apache Kafka Series - Learn Apache Kafka for Beginners v3"](https://www.udemy.com/course/apache-kafka/) course homework
 
+<!-- PREREQUISITES -->
 ---
 ### Kafka cluster run
 
 //TODO
 
+<!-- HOW TO RUN -->
 ---
 ### Application run
 
 //TODO
 
+
+<!-- ADDITIONAL -->
 ---
 
 ## Authors
