@@ -1,0 +1,9 @@
+# Server settings
+management:
+  server:
+    port: 8080
+
+# Kafka section
+kafka:
+  producer:
+    enabled: true

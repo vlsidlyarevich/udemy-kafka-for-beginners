@@ -1,5 +1,6 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
@@ -11,5 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application {
 
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
 
