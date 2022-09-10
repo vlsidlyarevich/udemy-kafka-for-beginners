@@ -1,8 +1,9 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners.configs;
 
-import com.github.vlsidlyarevich.udemy_kafka_for_beginners.producer.KafkaProducer;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.producer.SimpleKafkaProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,17 +15,16 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
+@EnableConfigurationProperties(value = KafkaProducerProperties.class)
 @ConditionalOnProperty(prefix = "kafka.producer", name = "enabled", havingValue = "true")
 public class KafkaProducerAutoConfiguration {
 
     @Bean
-    public KafkaProducer kafkaProducer() {
-        log.info("Creating kafka producer");
-        return new KafkaProducer() {
-            @Override
-            public int hashCode() {
-                return super.hashCode();
-            }
-        };
+    public SimpleKafkaProducer<?, ?> kafkaProducer(KafkaProducerProperties producerProperties) {
+        log.info("Creating kafka producer with {}", producerProperties);
+        return new SimpleKafkaProducer<>(
+                producerProperties.getBootstrapServers(),
+                producerProperties.getKeySerializer(),
+                producerProperties.getValueSerializer());
     }
 }
