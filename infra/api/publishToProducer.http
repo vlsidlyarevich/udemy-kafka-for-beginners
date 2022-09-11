@@ -1,0 +1,5 @@
+// The request body is provided in place
+POST http://localhost:8080/kafka/producer HTTP/2.0
+Content-Type: application/json
+
+{ "key" : "key2", "topic": "first_topic", "body": "hello producer! 1" }

@@ -1,12 +1,12 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners.producer;
 
-import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.springframework.stereotype.Component;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * SimpleKafkaProducer
@@ -19,8 +19,8 @@ public class SimpleKafkaProducer<K, V> {
     private final KafkaProducer<K, V> delegate;
 
     public SimpleKafkaProducer(String bootstrapServers,
-                               Class<K> keySerializer,
-                               Class<V> valueSerializer) {
+                               Class<?> keySerializer,
+                               Class<?> valueSerializer) {
         this.delegate = new KafkaProducer<>(
                 Map.of(
                         ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers,
@@ -28,5 +28,9 @@ public class SimpleKafkaProducer<K, V> {
                         ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer
                 )
         );
+    }
+
+    public Future<RecordMetadata> send(String topic, K key, V value) {
+        return delegate.send(new ProducerRecord<>(topic, key, value));
     }
 }

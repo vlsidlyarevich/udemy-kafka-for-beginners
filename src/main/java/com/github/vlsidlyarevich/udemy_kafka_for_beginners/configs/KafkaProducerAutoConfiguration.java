@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaProducerAutoConfiguration {
 
     @Bean
-    public SimpleKafkaProducer<?, ?> kafkaProducer(KafkaProducerProperties producerProperties) {
+    public SimpleKafkaProducer<String, String> kafkaProducer(KafkaProducerProperties producerProperties) {
         log.info("Creating kafka producer with {}", producerProperties);
         return new SimpleKafkaProducer<>(
                 producerProperties.getBootstrapServers(),
