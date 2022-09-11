@@ -30,7 +30,12 @@ public class SimpleKafkaProducer<K, V> {
         );
     }
 
-    public Future<RecordMetadata> send(String topic, K key, V value) {
-        return delegate.send(new ProducerRecord<>(topic, key, value));
+    public void send(String topic, K key, V value) {
+        delegate.send(new ProducerRecord<>(topic, key, value));
+        delegate.flush();
+    }
+
+    public void close() {
+        delegate.close();
     }
 }

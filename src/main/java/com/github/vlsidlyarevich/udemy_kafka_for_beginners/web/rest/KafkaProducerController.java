@@ -32,4 +32,10 @@ public class KafkaProducerController {
         producer.send(request.topic(), request.key(), request.body());
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/close")
+    public ResponseEntity<?> close() {
+        producer.close();
+        return ResponseEntity.accepted().build();
+    }
 }

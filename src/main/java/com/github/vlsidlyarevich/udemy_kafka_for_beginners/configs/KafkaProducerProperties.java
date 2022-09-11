@@ -14,6 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "kafka.producer")
 public class KafkaProducerProperties {
 
+    private boolean enabled = false;
     private String bootstrapServers;
     private Class<?> keySerializer = StringSerializer.class;
     private Class<?> valueSerializer = StringSerializer.class;
