@@ -16,4 +16,9 @@ public class SimpleKafkaConsumer<K, V> {
     public void listen(ConsumerRecords<K, V> records) {
 
     }
+
+    @KafkaConsumer(topicName = "first_topic")
+    public void wronglisten(String value, Integer va) {
+
+    }
 }
