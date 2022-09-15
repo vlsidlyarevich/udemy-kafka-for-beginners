@@ -1,8 +1,12 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer;
 
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanInitializationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,12 +19,16 @@ import java.lang.reflect.Modifier;
  * @author Vladislav Sidlyarevich <vlsidlyarevich@gmail.com>
  * Created on 9/13/22.
  */
-public class KafkaConsumerBeanPostProcessor implements BeanPostProcessor {
+@Setter
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class KafkaListenerBeanPostProcessor implements BeanPostProcessor {
+
+    private final KafkaListenerEndpointRegistrar listenerEndpointRegistrar;
 
     @Override
     public Object postProcessBeforeInitialization(final Object bean, final String beanName) throws BeansException {
         for (Method method : bean.getClass().getDeclaredMethods()) {
-            if (!method.isAnnotationPresent(KafkaConsumer.class)) continue;
+            if (!method.isAnnotationPresent(KafkaListener.class)) continue;
 
             if (method.getParameterCount() > 1) {
                 throw new BeanInitializationException("Found multiple arguments on @KafkaConsumer method in bean:" + bean);
@@ -34,11 +42,21 @@ public class KafkaConsumerBeanPostProcessor implements BeanPostProcessor {
                 throw new BeanInitializationException("@KafkaConsumer must be non static and public in bean:" + bean);
             }
 
-            try {
-                method.invoke(bean);
-            } catch (IllegalAccessException | InvocationTargetException e) {
-                throw new BeanInitializationException("Exception during method invocation", e);
-            }
+            //TODO multiple consumers called from one place?
+            ProxyFactory proxyFactory = new ProxyFactory(bean);
+            //TODO Луп в одном месте с настройками кол-ва потоков?
+            //TODO регистрируем себя на прослушивание топика
+            //TODO пул фиксированный по всем топикам и оповещениям всех слушающих
+
+            endpointRegistrar.register((consumerRecords) -> {
+                try {
+                    method.invoke(bean, consumerRecords);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                }
+            }, method.getAnnotation(KafkaListener.class).topicName());
+
+            return proxyFactory.getProxy();
         }
 
         return bean;

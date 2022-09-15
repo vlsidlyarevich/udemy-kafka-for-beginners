@@ -1,12 +1,15 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners.configs;
 
-import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaConsumerBeanPostProcessor;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaConsumerFactory;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListenerBeanPostProcessor;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListenerEndpointRegistrar;
 import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.SimpleKafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 /**
  * KafkaConsumerAutoConfiguration
@@ -21,8 +24,20 @@ import org.springframework.context.annotation.Configuration;
 public class KafkaConsumerAutoConfiguration {
 
     @Bean
-    public KafkaConsumerBeanPostProcessor kafkaConsumerBeanPostProcessor() {
-        return new KafkaConsumerBeanPostProcessor();
+    public KafkaConsumerFactory kafkaConsumerFactory() {
+
+    }
+
+    @Bean
+    public KafkaListenerEndpointRegistrar listenerEndpointRegistrar() {
+        return new KafkaListenerEndpointRegistrar();
+    }
+
+    @Bean
+    public KafkaListenerBeanPostProcessor kafkaConsumerBeanPostProcessor(
+            KafkaListenerEndpointRegistrar kafkaListenerEndpointRegistrar) {
+
+        return new KafkaListenerBeanPostProcessor(kafkaListenerEndpointRegistrar);
     }
 
     @Bean

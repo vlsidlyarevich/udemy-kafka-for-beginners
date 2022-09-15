@@ -12,12 +12,12 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 @Slf4j
 public class SimpleKafkaConsumer<K, V> {
 
-    @KafkaConsumer(topicName = "first_topic")
+    @KafkaListener(topicName = "first_topic")
     public void listen(ConsumerRecords<K, V> records) {
 
     }
 
-    @KafkaConsumer(topicName = "first_topic")
+    @KafkaListener(topicName = "first_topic")
     public void wronglisten(String value, Integer va) {
 
     }
