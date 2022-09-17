@@ -48,7 +48,7 @@ public class KafkaListenerBeanPostProcessor implements BeanPostProcessor {
             //TODO регистрируем себя на прослушивание топика
             //TODO пул фиксированный по всем топикам и оповещениям всех слушающих
 
-            endpointRegistrar.register((consumerRecords) -> {
+            listenerEndpointRegistrar.register((consumerRecords) -> {
                 try {
                     method.invoke(bean, consumerRecords);
                 } catch (IllegalAccessException | InvocationTargetException e) {

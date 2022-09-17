@@ -18,18 +18,21 @@ import java.util.function.Consumer;
  */
 public class KafkaListenerEndpointRegistrar {
 
+    private final int pollInterval;
     private final KafkaConsumer<?, ?> kafkaConsumer;
-    private final Map<String, List<Consumer<ConsumerRecords<?, ?>>>> consumers;
+    private final Map<String, List<Consumer<ConsumerRecords<?, ?>>>> subscribedListeners;
     private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
-    public KafkaListenerEndpointRegistrar(final KafkaConsumer<?, ?> kafkaConsumer) {
+    public KafkaListenerEndpointRegistrar(final KafkaConsumer<?, ?> kafkaConsumer,
+                                          int pollInterval) {
+        this.pollInterval = pollInterval;
         this.kafkaConsumer = kafkaConsumer;
-        consumers = new HashMap<>();
+        subscribedListeners = new HashMap<>();
         threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
     }
 
     public void register(Consumer<ConsumerRecords<?, ?>> consumer, String topic) {
-        consumers.compute(topic, (k, v) -> {
+        subscribedListeners.compute(topic, (k, v) -> {
             if (v == null) {
                 return Arrays.asList(consumer);
             } else {

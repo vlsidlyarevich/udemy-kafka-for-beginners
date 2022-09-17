@@ -14,5 +14,6 @@ kafka:
     enabled: true
     poll-interval: 5000
     bootstrap-servers: '127.0.0.1:9092'
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    group-id: "test-application"
+    key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-serializer: org.apache.kafka.common.serialization.StringDeserializer

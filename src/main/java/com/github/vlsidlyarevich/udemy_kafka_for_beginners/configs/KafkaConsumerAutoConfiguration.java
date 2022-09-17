@@ -5,11 +5,11 @@ import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListene
 import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListenerEndpointRegistrar;
 import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.SimpleKafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 /**
  * KafkaConsumerAutoConfiguration
@@ -25,12 +25,14 @@ public class KafkaConsumerAutoConfiguration {
 
     @Bean
     public KafkaConsumerFactory kafkaConsumerFactory() {
-
+        return new KafkaConsumerFactory();
     }
 
     @Bean
-    public KafkaListenerEndpointRegistrar listenerEndpointRegistrar() {
-        return new KafkaListenerEndpointRegistrar();
+    public KafkaListenerEndpointRegistrar listenerEndpointRegistrar(KafkaConsumerFactory consumerFactory,
+                                                                    KafkaConsumerProperties consumerSettings) {
+        KafkaConsumer<?, ?> kafkaConsumer = consumerFactory.build(consumerSettings);
+        return new KafkaListenerEndpointRegistrar(kafkaConsumer, consumerSettings.getPollInterval());
     }
 
     @Bean
