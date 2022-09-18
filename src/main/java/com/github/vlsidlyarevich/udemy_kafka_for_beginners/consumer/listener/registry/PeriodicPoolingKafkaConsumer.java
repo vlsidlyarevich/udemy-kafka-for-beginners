@@ -58,6 +58,7 @@ public class PeriodicPoolingKafkaConsumer {
         });
     }
 
+    //TODO support partitions
 //    public void register(Consumer<ConsumerRecords<?, ?>> consumer, String topic, String partitionName) {
 //        consumers.compute(topic, (k, v) -> {
 //            if (v == null) {
@@ -81,12 +82,10 @@ public class PeriodicPoolingKafkaConsumer {
             // schedule periodical pooling
             var scheduledFuture = this.scheduledExecutor
                     .scheduleWithFixedDelay(() -> {
-                        // forward computation to separate thread pool
-                        listenersExecutor.submit(() -> {
 
-                            var consumerRecords = kafkaConsumer.poll(Duration.ofMillis(consumerTimeoutMs));
-                            subscribers.forEach(callback -> callback.accept(consumerRecords));
-                        });
+                        // forward computation to separate thread pool
+                        listenersExecutor.submit(new KafkaConsumerPollCommand(consumerTimeoutMs, kafkaConsumer, subscribers));
+
                     }, 0, pollInterval, TimeUnit.MILLISECONDS);
 
             // save pooling tasks

@@ -17,9 +17,4 @@ public class SimpleKafkaConsumer<K, V> {
     public void listen(ConsumerRecords<K, V> records) {
         log.error("kek {}", records);
     }
-
-    @KafkaListener(topicName = "first_topic")
-    public void wronglisten(String value, Integer va) {
-
-    }
 }
