@@ -43,11 +43,7 @@ public class KafkaListenerBeanPostProcessor implements BeanPostProcessor {
                 throw new BeanInitializationException("@KafkaConsumer must be non static and public in bean:" + bean);
             }
 
-            //TODO multiple consumers called from one place?
             ProxyFactory proxyFactory = new ProxyFactory(bean);
-            //TODO Луп в одном месте с настройками кол-ва потоков?
-            //TODO регистрируем себя на прослушивание топика
-            //TODO пул фиксированный по всем топикам и оповещениям всех слушающих
 
             listenerEndpointRegistrar.register((consumerRecords) -> {
                 try {
