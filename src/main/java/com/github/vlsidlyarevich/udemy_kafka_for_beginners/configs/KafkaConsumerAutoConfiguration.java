@@ -1,8 +1,9 @@
 package com.github.vlsidlyarevich.udemy_kafka_for_beginners.configs;
 
 import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaConsumerFactory;
-import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListenerBeanPostProcessor;
-import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.KafkaListenerEndpointRegistrar;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.event.KafkaConsumerApplicationListener;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.listener.KafkaListenerBeanPostProcessor;
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.listener.registry.PeriodicPoolingKafkaConsumer;
 import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.SimpleKafkaConsumer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -29,17 +30,25 @@ public class KafkaConsumerAutoConfiguration {
     }
 
     @Bean
-    public KafkaListenerEndpointRegistrar listenerEndpointRegistrar(KafkaConsumerFactory consumerFactory,
-                                                                    KafkaConsumerProperties consumerSettings) {
+    public PeriodicPoolingKafkaConsumer listenerEndpointRegistrar(KafkaConsumerFactory consumerFactory,
+                                                                  KafkaConsumerProperties consumerSettings) {
         KafkaConsumer<?, ?> kafkaConsumer = consumerFactory.build(consumerSettings);
-        return new KafkaListenerEndpointRegistrar(kafkaConsumer, consumerSettings.getPollInterval());
+        return new PeriodicPoolingKafkaConsumer(kafkaConsumer,
+                consumerSettings.getTimeout(),
+                consumerSettings.getThreadPoolSize(),
+                consumerSettings.getPollInterval());
     }
 
     @Bean
     public KafkaListenerBeanPostProcessor kafkaConsumerBeanPostProcessor(
-            KafkaListenerEndpointRegistrar kafkaListenerEndpointRegistrar) {
+            PeriodicPoolingKafkaConsumer kafkaListenerEndpointRegistrar) {
 
         return new KafkaListenerBeanPostProcessor(kafkaListenerEndpointRegistrar);
+    }
+
+    @Bean
+    public KafkaConsumerApplicationListener kafkaConsumerApplicationListener(PeriodicPoolingKafkaConsumer poolingKafkaConsumer) {
+        return new KafkaConsumerApplicationListener(poolingKafkaConsumer);
     }
 
     @Bean

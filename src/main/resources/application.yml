@@ -13,6 +13,8 @@ kafka:
   consumer:
     enabled: true
     poll-interval: 5000
+    timeout: 1000
+    thread-pool-size: 1
     bootstrap-servers: '127.0.0.1:9092'
     group-id: "test-application"
     key-serializer: org.apache.kafka.common.serialization.StringDeserializer

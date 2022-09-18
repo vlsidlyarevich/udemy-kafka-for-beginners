@@ -1,5 +1,6 @@
-package com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer;
+package com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.listener;
 
+import com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.listener.registry.PeriodicPoolingKafkaConsumer;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -23,7 +24,7 @@ import java.lang.reflect.Modifier;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class KafkaListenerBeanPostProcessor implements BeanPostProcessor {
 
-    private final KafkaListenerEndpointRegistrar listenerEndpointRegistrar;
+    private final PeriodicPoolingKafkaConsumer listenerEndpointRegistrar;
 
     @Override
     public Object postProcessBeforeInitialization(final Object bean, final String beanName) throws BeansException {

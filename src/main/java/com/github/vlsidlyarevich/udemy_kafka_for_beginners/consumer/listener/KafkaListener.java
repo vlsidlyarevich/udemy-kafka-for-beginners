@@ -1,4 +1,4 @@
-package com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer;
+package com.github.vlsidlyarevich.udemy_kafka_for_beginners.consumer.listener;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

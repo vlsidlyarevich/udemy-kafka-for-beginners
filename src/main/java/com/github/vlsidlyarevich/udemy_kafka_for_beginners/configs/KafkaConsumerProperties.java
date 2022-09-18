@@ -16,6 +16,8 @@ public class KafkaConsumerProperties {
 
     private boolean enabled = false;
     private int pollInterval = 1000;
+    private int timeout = 10000;
+    private int threadPoolSize = 1;
     private String bootstrapServers;
     private String groupId;
     private Class<?> keySerializer = StringSerializer.class;
