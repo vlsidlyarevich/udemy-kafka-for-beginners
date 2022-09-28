@@ -1,10 +1,7 @@
 # Kafka for beginners course homework
 ![GitHub](https://img.shields.io/github/license/vlsidlyarevich/udemy-kafka-for-beginners)
 [![Build artifact](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml)
-
-TODO quality gate status
-TODO coverage status
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
 
 Udemy ["Apache Kafka Series - Learn Apache Kafka for Beginners v3"](https://www.udemy.com/course/apache-kafka/) course homework
 
