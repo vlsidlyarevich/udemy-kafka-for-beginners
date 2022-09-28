@@ -1,6 +1,6 @@
 # Kafka for beginners course homework
 ![GitHub](https://img.shields.io/github/license/vlsidlyarevich/udemy-kafka-for-beginners)
-![GitHub CI](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml/badge.svg)
+[![Build artifact](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml)
 
 TODO quality gate status
 TODO coverage status
