@@ -1,6 +1,7 @@
 # Kafka for beginners course homework
 ![GitHub](https://img.shields.io/github/license/vlsidlyarevich/udemy-kafka-for-beginners)
-TODO build status
+![GitHub CI](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml/badge.svg)
+
 TODO quality gate status
 TODO coverage status
 
