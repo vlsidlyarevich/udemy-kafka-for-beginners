@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -59,16 +58,6 @@ public class PeriodicPoolingKafkaConsumer {
     }
 
     //TODO support partitions
-//    public void register(Consumer<ConsumerRecords<?, ?>> consumer, String topic, String partitionName) {
-//        consumers.compute(topic, (k, v) -> {
-//            if (v == null) {
-//                return Arrays.asList(consumer);
-//            } else {
-//                v.add(consumer);
-//                return v;
-//            }
-//        });
-//    }
 
     public void startPolling() {
         // stop all listeners
