@@ -1,7 +1,12 @@
 # Kafka for beginners course homework
 ![GitHub](https://img.shields.io/github/license/vlsidlyarevich/udemy-kafka-for-beginners)
 [![Build artifact](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/vlsidlyarevich/udemy-kafka-for-beginners/actions/workflows/maven.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=bugs)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=coverage)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=vlsidlyarevich_udemy-kafka-for-beginners&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=vlsidlyarevich_udemy-kafka-for-beginners)
+
 
 Udemy ["Apache Kafka Series - Learn Apache Kafka for Beginners v3"](https://www.udemy.com/course/apache-kafka/) course homework
 
